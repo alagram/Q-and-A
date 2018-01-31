@@ -59,3 +59,4 @@ end
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'figaro'
 gem 'factory_bot_rails', '~> 4.0'
+gem 'bootstrap-sass', '~> 3.3.6'
