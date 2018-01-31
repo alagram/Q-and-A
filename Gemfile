@@ -60,3 +60,6 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'figaro'
 gem 'factory_bot_rails', '~> 4.0'
 gem 'bootstrap-sass', '~> 3.3.6'
+gem 'html-pipeline',  '~>1.11.0'
+gem 'github-markdown', '~> 0.6.7'
+gem 'gemoji', '~> 2.1.0'
