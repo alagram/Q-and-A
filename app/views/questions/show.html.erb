@@ -1,11 +1,19 @@
 
 <div class="row">
-  <%= link_to("All Questions", root_path) %>
-
   <div class="col-sm-6 col-sm-offset-3">
-    <p class="text-center">
-      <%= to_markdown @question.body %>
+
+    <p>
+      <%= link_to("All Questions", root_path) %>
     </p>
+
+    <div class="well">
+      <div class="pull-right">
+        <%= link_to "edit", edit_question_path(@question) %> <%# check if question.user == current_user %>
+        |
+        <%= link_to "delete", question_path(@question), { method: :delete, data: { confirm: "Are you sure" } }  %>
+      </div>
+      <%= to_markdown @question.body %>
+    </div>
     <hr>
 
     <%= form_for [@question, @answer] do |f| %>
