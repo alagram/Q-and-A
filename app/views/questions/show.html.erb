@@ -1,0 +1,32 @@
+
+<div class="row">
+  <%= link_to("All Questions", root_path) %>
+
+  <div class="col-sm-6 col-sm-offset-3">
+    <p class="text-center">
+      <%= @question.body %>
+    </p>
+    <hr>
+
+    <%= form_for [@question, @answer] do |f| %>
+      <%= render :partial => "shared/model_errors", locals: { model: @answer } %>
+      <div class="form-group">
+        <%= f.text_area :body, rows: 4, class: "form-control"  %>
+      </div>
+      <div class="form-group">
+        <%= f.submit "submit answer", class: "btn btn-primary"  %>
+      </div>
+    <% end %>
+
+    <h5>Answers:</h5>
+
+    <% if @question.reload.answers.empty? %>
+      <em class="text-muted">No answes yet. Be there first to answer this question</em>
+    <% end %>
+
+    <% @question.reload.answers.each do |answer| %>
+      <%= render 'answers/answer', answer: answer %>
+    <% end %>
+  </div>
+</div>
+

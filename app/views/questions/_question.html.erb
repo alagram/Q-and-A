@@ -1,0 +1,14 @@
+<div class="row">
+  <div class="col-sm-8 col-sm-offset-2">
+    <div class="pull-right">
+      <%= link_to "edit", edit_question_path(question) %> <%# check if question.user == current_user %>
+      <%= link_to "delete", question_path(question), { method: :delete, data: { confirm: "Are you sure" } }  %>
+    </div>
+    <li><%= question.title %></li>
+    <small>
+      <span>
+        <%= link_to("#{question.answers.size} answers", question_path(question)) %>
+      </span>
+    </small>
+  </div>
+</div>

@@ -1,0 +1,26 @@
+<%= form_for @question do |f| %>
+
+  <% if @question.errors.any? %>
+    <%= render :partial => "shared/model_errors", locals: { model: @question } %>
+  <% end %>
+
+  <div class="row">
+    <div class="form-group">
+      <%= f.label :title %>
+      <%= f.text_field :title, placeholder: "Add a title", class: "form-control"  %>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="form-group">
+      <%= f.label :body %>
+      <%= f.text_area :body, placeholder: "Add your question", rows: 8, class: "form-control"  %>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="form-group">
+      <%= f.submit @question.new_record? ? "Add question" : "Update question", class: 'btn btn-primary' %>
+    </div>
+  </div>
+<% end %>
