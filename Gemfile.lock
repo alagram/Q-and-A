@@ -111,6 +111,8 @@ GEM
     nio4r (2.2.0)
     nokogiri (1.8.1)
       mini_portile2 (~> 2.3.0)
+    nokogumbo (1.5.0)
+      nokogiri
     pg (0.21.0)
     pry (0.11.3)
       coderay (~> 1.1.0)
@@ -168,6 +170,10 @@ GEM
       rspec-mocks (~> 3.7.0)
       rspec-support (~> 3.7.0)
     rspec-support (3.7.1)
+    sanitize (4.6.0)
+      crass (~> 1.0.2)
+      nokogiri (>= 1.4.4)
+      nokogumbo (~> 1.4)
     sass (3.5.5)
       sass-listen (~> 4.0.0)
     sass-listen (4.0.0)
@@ -237,6 +243,7 @@ DEPENDENCIES
   rails (~> 5.0.6)
   rails-controller-testing
   rspec-rails (~> 3.5)
+  sanitize (~> 4.0, >= 4.0.1)
   sass-rails (~> 5.0)
   shoulda-matchers (~> 3.0)
   spring
