@@ -1,14 +1,13 @@
-<div class="row">
-  <div class="col-sm-8 col-sm-offset-2">
-    <li><%= question.title %>
-    <small>asked by<%= question.user.first_name %> <%= question.created_at.strftime("on %m/%d/%Y %l:%M%P") %></small>
-    </li>
+<div class="box-body">
+  <li><%= question.title %>
+  <small>asked by<%= question.user.first_name %> <%= question.created_at.strftime("on %m/%d/%Y %l:%M%P") %></small>
+  </li>
 
-    <small>
-      <span>
-        <%= link_to("#{question.answers.size} answers", question_path(question)) %>
-      </span>
-    </small>
-    <hr>
-  </div>
+  <small>
+    <span>
+      <%= link_to("#{question.answers.size} answers", question_path(question)) %>
+    </span>
+  </small>
+
+  <hr>
 </div>

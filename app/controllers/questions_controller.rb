@@ -28,6 +28,7 @@ class QuestionsController < ApplicationController
 
   def update
     if @question.update(question_params)
+      invoke_cables
       redirect_to @question, notice: "This question was updated."
     else
       render :edit
@@ -51,5 +52,13 @@ class QuestionsController < ApplicationController
 
   def question_params
     params.require(:question).permit(:title, :body)
+  end
+
+  def invoke_cables
+    CableServices::NotifyJobsService.(
+      question: @question,
+      action: action_name.to_sym,
+      user: current_user
+    )
   end
 end
