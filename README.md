@@ -1,23 +1,18 @@
-# Database Stucture
+# Search
+====
+The search feature uses Elastic Search. The advantages Elastic Search has over basic searching with SQL queries are
+1. Extra whitespaces - where dishwasher matches dish washer
+2. Misspellings - it rials matches rails
+3. Highly scallable
 
-1. User  - Devise
-    * email: string
-    * password: string
+In addition to searching by title and body, I've added an autocomplete feature on the body of Questions.
 
-    has_many: questions
-    has_many: answers
+To get search working on development, you'll have to install elastic search:
 
-  2. Question
-    * user_id: interger
-    * title: string
-    * body:text
-    belongs_to :user
-    has_many: answers
+`brew install elasticsearch`
 
-  3. Answer
-    * body: text
-    * user_id: interger
-    * question_id: interger
+Then start elasticseach by running:
 
-    belongs_to :question
-    belongs_to :user
+`brew services start elasticsearch`
+
+It is advisable to reindex after adding Questions so the search feature delivers accurate results. You can do so with: `rake searchkick:reindex:all` on the terminal.

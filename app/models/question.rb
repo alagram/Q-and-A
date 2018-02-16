@@ -4,4 +4,13 @@ class Question < ApplicationRecord
 
   validates :title, :presence => true
   validates :body, :presence => true
+
+  searchkick  text_start: [:title]
+
+  def search_data
+    {
+      title: title,
+      body: body
+    }
+  end
 end

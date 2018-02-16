@@ -2,7 +2,8 @@ class QuestionsController < ApplicationController
   before_action :set_question, only: [:show, :edit, :update, :destroy]
 
   def index
-    @questions = Question.all
+    query = params[:q].presence || "*"
+    @questions = Question.search(query)
   end
 
   def new
@@ -25,7 +26,7 @@ class QuestionsController < ApplicationController
 
   def update
     if @question.update(question_params)
-      redirect_to root_path, notice: "This question was updated."
+      redirect_to @question, notice: "This question was updated."
     else
       render :edit
     end
@@ -34,6 +35,10 @@ class QuestionsController < ApplicationController
   def destroy
     @question.destroy
     redirect_to root_path, notice: "Question was successfully destroyed."
+  end
+
+  def autocomplete
+    render json: Question.search(params[:term], fields: [{title: :text_start}], limit: 10).map(&:title)
   end
 
   private
