@@ -12,9 +12,11 @@ class QuestionsController < ApplicationController
 
   def create
     @question = Question.new(question_params)
+    @question.user = current_user
 
     if @question.save
-      redirect_to root_path, notice: 'Question was successfully created.'
+      flash[:notice] = 'Question was successfully created.'
+      redirect_to root_path
     else
       render :new
     end
@@ -44,7 +46,7 @@ class QuestionsController < ApplicationController
   private
 
   def set_question
-    @question = Question.find(params[:id])
+    @question = Question.find_by(hash_id: params[:id])
   end
 
   def question_params
