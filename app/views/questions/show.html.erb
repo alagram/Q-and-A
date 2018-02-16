@@ -6,12 +6,16 @@
       <%= link_to("All Questions", root_path) %>
     </p>
 
+    <hr>
+
     <div class="well">
       <div class="pull-right">
         <%= link_to "edit", edit_question_path(@question) %> <%# check if question.user == current_user %>
         |
         <%= link_to "delete", question_path(@question), { method: :delete, data: { confirm: "Are you sure" } }  %>
       </div>
+      <h1><%= @question.title  %></h1>
+
       <%= to_markdown @question.body %>
     </div>
     <hr>

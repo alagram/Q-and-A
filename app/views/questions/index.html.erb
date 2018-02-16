@@ -6,6 +6,10 @@
   All Question
 </h2>
 
+<%= form_tag questions_path, method: :get do %>
+  <%= text_field_tag :q, nil, placeholder: 'Search...'  %>
+<% end %>
+
 <ul>
   <% @questions.each do |question| %>
     <%= render 'question', question: question  %>
