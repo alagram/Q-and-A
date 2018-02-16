@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180216113456) do
+ActiveRecord::Schema.define(version: 20180216195452) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -29,6 +29,8 @@ ActiveRecord::Schema.define(version: 20180216113456) do
     t.text     "body"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string   "hash_id"
+    t.index ["hash_id"], name: "index_questions_on_hash_id", using: :btree
   end
 
   create_table "users", force: :cascade do |t|
@@ -36,7 +38,6 @@ ActiveRecord::Schema.define(version: 20180216113456) do
     t.string   "last_name"
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
-    t.string   "hash_id"
     t.string   "email",                  default: "", null: false
     t.string   "encrypted_password",     default: "", null: false
     t.string   "reset_password_token"
@@ -47,8 +48,12 @@ ActiveRecord::Schema.define(version: 20180216113456) do
     t.datetime "last_sign_in_at"
     t.inet     "current_sign_in_ip"
     t.inet     "last_sign_in_ip"
+    t.string   "uid"
+    t.string   "provider"
+    t.string   "token"
+    t.string   "refresh_token"
+    t.datetime "oauth_expires_at"
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
-    t.index ["hash_id"], name: "index_users_on_hash_id", using: :btree
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   end
 

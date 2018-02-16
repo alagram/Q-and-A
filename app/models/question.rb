@@ -1,6 +1,7 @@
 class Question < ApplicationRecord
-  # belongs_to :user
-  has_many :answers
+  include Friendlyable
+  belongs_to :user
+  has_many :answers, -> { order("created_at DESC") }
 
   validates :title, :presence => true
   validates :body, :presence => true

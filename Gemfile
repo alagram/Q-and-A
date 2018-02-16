@@ -56,6 +56,7 @@ group :test do
   gem 'capybara'
   gem 'faker'
   gem 'shoulda-matchers', '~> 3.0'
+  gem 'database_cleaner'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
@@ -72,3 +73,4 @@ gem 'jquery-ui-rails'
 gem 'omniauth-google-oauth2'
 gem 'figaro'
 gem 'devise'
+gem 'friendly_id', '~> 5.1.0'
