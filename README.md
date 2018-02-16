@@ -15,4 +15,4 @@ Then start elasticseach by running:
 
 `brew services start elasticsearch`
 
-It is advisable to reindex after adding Questions so the search feature delivers accurate results. You can do so with: `rake searchkick:reindex:all` on the terminal.
+It is advisable to reindex in development and production after adding Questions so the search feature delivers accurate results. You can do so with: `rake searchkick:reindex:all` on the terminal.

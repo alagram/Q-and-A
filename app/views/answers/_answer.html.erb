@@ -1,4 +1,5 @@
 <div>
   <em><%= to_markdown answer.body %></em>
+  <small><%= answer.user.first_name %> <%= answer.created_at.strftime("on %m/%d/%Y %l:%M%P") %></small>
 </div>
 <hr>
