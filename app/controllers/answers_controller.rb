@@ -6,8 +6,10 @@ class AnswersController < ApplicationController
     @answer.user = current_user
 
     if @answer.save
+      invoke_cables
       redirect_to question_path(@question), notice: "Your answer was added."
     else
+      @answers = @question.answers.reload
       render 'questions/show'
     end
   end
@@ -16,5 +18,13 @@ class AnswersController < ApplicationController
 
   def answer_params
     params.require(:answer).permit(:body)
+  end
+
+  def invoke_cables
+    CableServices::NotifyJobsService.(
+      question: @question,
+      action: action_name.to_sym,
+      user: current_user
+    )
   end
 end

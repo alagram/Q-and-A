@@ -17,6 +17,8 @@ module CableServices
     def perform
       if action == :update
         Cables::QuestionItemDomJob.perform_later(question)
+      else
+        Cables::QuestionAnswersDomJob.perform_later(question)
       end
     end
   end
