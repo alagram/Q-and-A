@@ -1,3 +1,7 @@
+<p>
+  <%= pluralize(@questions.size, 'result') %> found
+</p>
+
 <ul>
   <% @questions.each do |question| %>
     <%= render 'question', question: question  %>
