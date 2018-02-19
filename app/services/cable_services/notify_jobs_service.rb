@@ -1,8 +1,9 @@
 module CableServices
   class NotifyJobsService
 
-    def initialize(question)
-      @question = question
+    def initialize(params)
+      @question = params[:question]
+      @current_user_id = params[:current_user_id]
     end
 
     def self.call(params)
@@ -11,10 +12,10 @@ module CableServices
 
     private
 
-    attr_reader :question
+    attr_reader :question, :current_user_id
 
     def perform
-      Cables::QuestionAnswersDomJob.perform_later(question)
+      Cables::QuestionAnswersDomJob.perform_later(question, current_user_id)
     end
   end
 end
