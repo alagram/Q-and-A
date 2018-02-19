@@ -9,7 +9,7 @@ Rails.application.routes.draw do
       get :search
     end
 
-    resources :answers
+    resources :answers, except: [:index, :new]
   end
 
   require "sidekiq/web"

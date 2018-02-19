@@ -13,6 +13,7 @@
       <div class="row">
         <%= flash_messages %>
         <p>
+          Hello <%= current_user.first_name %>
           <%= link_to("Q n A", root_path) %>
         </p>
         <%= yield %>

@@ -1,7 +1,9 @@
 class AnswersController < ApplicationController
+  before_action :set_question, only: [:create, :edit, :update, :destroy]
+  before_action :set_answer, only: [:edit, :update, :destroy]
+
 
   def create
-    @question = Question.find_by(hash_id: params[:question_id])
     @answer = @question.answers.build(answer_params)
     @answer.user = current_user
 
@@ -14,6 +16,21 @@ class AnswersController < ApplicationController
     end
   end
 
+  def edit; end
+
+  def update
+    if @answer.update(answer_params)
+      redirect_to question_path(@question), notice: 'Your answer was updated.'
+    else
+      render :edit
+    end
+  end
+
+  def destroy
+    @answer.destroy
+    redirect_to question_path(@question), notice: 'Your answer was deleted.'
+  end
+
   private
 
   def answer_params
@@ -24,5 +41,13 @@ class AnswersController < ApplicationController
     CableServices::NotifyJobsService.(
       @question
     )
+  end
+
+  def set_question
+    @question = Question.find_by(hash_id: params[:question_id])
+  end
+
+  def set_answer
+    @answer = Answer.find_by(hash_id: params[:id])
   end
 end

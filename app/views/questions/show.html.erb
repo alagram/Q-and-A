@@ -12,20 +12,11 @@
 
 <hr>
 
-<%= form_for [@question, @answer] do |f| %>
-  <%= render :partial => "shared/model_errors", locals: { model: @answer } %>
-
-  <%= f.text_area :body, placeholder: "Answer... markdown and emoji supported", rows: 4, cols: 50 %>
-
-  <br>
-
-  <%= f.submit "submit answer"%>
-
-<% end %>
+<%= render partial: 'answers/form' %>
 
 <h5>Answers:</h5>
 
 <div id="answers-container">
-  <%= render partial: 'questions/answers', locals: { answers: @answers }  %>
+  <%= render partial: 'questions/answers', locals: { answers: @answers, question: @question } %>
 </div>
 
