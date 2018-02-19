@@ -2,8 +2,10 @@ class QuestionsController < ApplicationController
   before_action :set_question, only: [:show, :edit, :update, :destroy]
 
   def index
-    query = params[:q].presence || "*"
-    @questions = Question.search(query)
+    @questions = Question
+                  .order(created_at: :desc)
+                  .page(params[:page])
+                  .per(5)
   end
 
   def new
@@ -42,6 +44,11 @@ class QuestionsController < ApplicationController
 
   def autocomplete
     render json: Question.search(params[:term], fields: [{title: :text_start}], limit: 10).map(&:title)
+  end
+
+  def search
+    query = params[:q].presence || "*"
+    @questions = Question.search(query)
   end
 
   private

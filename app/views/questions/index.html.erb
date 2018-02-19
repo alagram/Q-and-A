@@ -1,5 +1,5 @@
 <%= link_to new_question_path do %>
-  <button class="btn btn-success">add new question</button>
+  <button>add new question</button>
 <% end %>
 
 <p>
@@ -10,9 +10,11 @@
   All Question
 </h2>
 
-<%= form_tag questions_path, method: :get do %>
+<%= form_tag search_questions_path, method: :get do %>
   <%= text_field_tag :q, nil, placeholder: 'Search...'  %>
 <% end %>
+
+<hr>
 
 <% if @questions.empty? %>
   <p>No questions are available to display</p>
@@ -20,11 +22,8 @@
 
 <ul>
   <% @questions.each do |question| %>
-    <div class="row">
-      <div class="col-sm-8 col-sm-offset-2 question-box" data-question="<%= question.id %>">
-        <%= render 'question', question: question  %>
-      </div>
-    </div>
+    <%= render 'question', question: question  %>
   <% end %>
 </ul>
 
+<%= paginate @questions %>

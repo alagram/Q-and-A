@@ -1,42 +1,30 @@
+<hr>
 
-<div class="row">
-  <div class="col-sm-6 col-sm-offset-3">
 
-    <p>
-      <%= link_to("All Questions", root_path) %>
-    </p>
+<%= link_to "edit", edit_question_path(@question) %> <%# check if question.user == current_user %>
+|
+<%= link_to "delete", question_path(@question), { method: :delete, data: { confirm: "Are you sure" } }  %>
 
-    <hr>
+<h1><%= @question.title  %></h1>
 
-    <div class="well">
-      <div class="pull-right">
-        <% if question.user == current_user %>
-          <%= link_to "edit", edit_question_path(@question) %>
-          |
-          <%= link_to "delete", question_path(@question), { method: :delete, data: { confirm: "Are you sure" } }  %>
-        <% end %>
-      </div>
-      <h1><%= @question.title  %></h1>
+<%= to_markdown @question.body %>
 
-      <%= to_markdown @question.body %>
-    </div>
-    <hr>
+<hr>
 
-    <%= form_for [@question, @answer] do |f| %>
-      <%= render :partial => "shared/model_errors", locals: { model: @answer } %>
-      <div class="form-group">
-        <%= f.text_area :body, placeholder: "Answer... markdown and emoji supported", rows: 4, class: "form-control"  %>
-      </div>
-      <div class="form-group">
-        <%= f.submit "submit answer", class: "btn btn-primary"  %>
-      </div>
-    <% end %>
+<%= form_for [@question, @answer] do |f| %>
+  <%= render :partial => "shared/model_errors", locals: { model: @answer } %>
 
-    <h5>Answers:</h5>
+  <%= f.text_area :body, placeholder: "Answer... markdown and emoji supported", rows: 4, cols: 50 %>
 
-    <div id="answers-container">
-      <%= render partial: 'questions/answers', locals: { answers: @answers }  %>
-    </div>
-  </div>
+  <br>
+
+  <%= f.submit "submit answer"%>
+
+<% end %>
+
+<h5>Answers:</h5>
+
+<div id="answers-container">
+  <%= render partial: 'questions/answers', locals: { answers: @answers }  %>
 </div>
 
