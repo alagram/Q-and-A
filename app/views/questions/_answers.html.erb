@@ -3,5 +3,5 @@
 <% end %>
 
 <% answers.each do |answer| %>
-  <%= render 'answers/answer', answer: answer %>
+  <%= render partial: 'answers/answer', locals: { answer: answer, question: question} %>
 <% end %>
