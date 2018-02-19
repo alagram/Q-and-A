@@ -22,9 +22,7 @@ class AnswersController < ApplicationController
 
   def invoke_cables
     CableServices::NotifyJobsService.(
-      question: @question,
-      action: action_name.to_sym,
-      user: current_user
+      @question
     )
   end
 end

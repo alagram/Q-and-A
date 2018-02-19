@@ -1,11 +1,8 @@
 module CableServices
   class NotifyJobsService
-    attr_reader :question, :action, :user
 
-    def initialize(params)
-      @question = params[:question]
-      @action = params[:action]
-      @user = params[:user]
+    def initialize(question)
+      @question = question
     end
 
     def self.call(params)
@@ -14,12 +11,10 @@ module CableServices
 
     private
 
+    attr_reader :question
+
     def perform
-      if action == :update
-        Cables::QuestionItemDomJob.perform_later(question)
-      else
-        Cables::QuestionAnswersDomJob.perform_later(question)
-      end
+      Cables::QuestionAnswersDomJob.perform_later(question)
     end
   end
 end
