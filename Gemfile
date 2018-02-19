@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-
+ruby '2.4.0'
 git_source(:github) do |repo_name|
   repo_name = "#{repo_name}/#{repo_name}" unless repo_name.include?("/")
   "https://github.com/#{repo_name}.git"
@@ -70,7 +70,7 @@ gem 'html-pipeline',  '~>1.11.0'
 gem 'github-markdown', '~> 0.6.7'
 gem 'gemoji', '~> 2.1.0'
 gem 'sanitize', '~> 4.0', '>= 4.0.1'
-gem 'searchkick'
+gem 'searchkick', '~> 2.5.0'
 gem 'jquery-ui-rails'
 gem 'omniauth-google-oauth2'
 gem 'figaro'
