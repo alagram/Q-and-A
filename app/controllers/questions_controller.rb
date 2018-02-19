@@ -24,6 +24,7 @@ class QuestionsController < ApplicationController
 
   def show
     @answer = Answer.new
+    @answers = @question.reload.answers
   end
 
   def update

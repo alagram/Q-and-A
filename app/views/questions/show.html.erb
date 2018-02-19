@@ -32,13 +32,9 @@
 
     <h5>Answers:</h5>
 
-    <% if @question.reload.answers.empty? %>
-      <em class="text-muted">No answes yet. Be there first to answer this question</em>
-    <% end %>
-
-    <% @question.reload.answers.each do |answer| %>
-      <%= render 'answers/answer', answer: answer %>
-    <% end %>
+    <div id="answers-container">
+      <%= render partial: 'questions/answers', locals: { answers: @answers }  %>
+    </div>
   </div>
 </div>
 

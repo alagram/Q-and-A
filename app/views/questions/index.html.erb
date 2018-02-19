@@ -14,9 +14,17 @@
   <%= text_field_tag :q, nil, placeholder: 'Search...'  %>
 <% end %>
 
+<% if @questions.empty? %>
+  <p>No questions are available to display</p>
+<% end %>
+
 <ul>
   <% @questions.each do |question| %>
-    <%= render 'question', question: question  %>
+    <div class="row">
+      <div class="col-sm-8 col-sm-offset-2 question-box" data-question="<%= question.id %>">
+        <%= render 'question', question: question  %>
+      </div>
+    </div>
   <% end %>
 </ul>
 

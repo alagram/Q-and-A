@@ -1,0 +1,7 @@
+<% if answers.empty? %>
+  <em class="text-muted">No answers yet. Be the first to answer this question</em>
+<% end %>
+
+<% answers.each do |answer| %>
+  <%= render 'answers/answer', answer: answer %>
+<% end %>

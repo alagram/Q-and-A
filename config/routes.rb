@@ -11,5 +11,18 @@ Rails.application.routes.draw do
     resources :answers
   end
 
+  require "sidekiq/web"
+  Sidekiq::Web.use Rack::Auth::Basic do |username, password|
+    ActiveSupport::SecurityUtils.secure_compare(
+      ::Digest::SHA256.hexdigest(username),
+      ::Digest::SHA256.hexdigest(ENV["SK_USER"])
+    ) &
+    ActiveSupport::SecurityUtils.secure_compare(
+      ::Digest::SHA256.hexdigest(password),
+      ::Digest::SHA256.hexdigest(ENV["SK_PASS"])
+      )
+  end if Rails.env.production?
+  mount Sidekiq::Web, at: "/sidekiq"
+
   root to: 'questions#index'
 end
