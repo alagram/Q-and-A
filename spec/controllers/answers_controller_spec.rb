@@ -1,16 +1,17 @@
 require 'rails_helper'
 
 RSpec.describe AnswersController, type: :controller do
-  sign_in_user
-
-  let(:question) { FactoryBot.create(:question, user: @user, body: 'test') }
 
   describe 'POST #create' do
+    sign_in_user
+
+    let(:question) { FactoryBot.create(:question, body: 'test') }
+
     let(:attribs) do
       { body: 'Hell yeah!' }
     end
 
-    context 'with redirects to question show page' do
+    context 'with valid params' do
       it 'creates a new answer' do
         post :create, params: { question_id: question.to_param, answer: attribs }
         expect(response).to redirect_to(question_path(question))
@@ -22,12 +23,6 @@ RSpec.describe AnswersController, type: :controller do
         end.to change(Answer, :count).by(1)
       end
 
-      it 'assigns answer to @answer' do
-        post :create, params: { question_id: question.to_param, answer: attribs }
-        expect(assigns(:answer)).to be_a(Answer)
-        expect(assigns(:answer)).to be_persisted
-      end
-
       it 'render "questions/show" on failure' do
         post :create, params: { question_id: question.to_param, answer: { body: nil } }
         expect(response).to render_template 'questions/show'
@@ -37,6 +32,7 @@ RSpec.describe AnswersController, type: :controller do
 
   describe 'PUT #update' do
     sign_in_user
+    let(:question) { FactoryBot.create(:question, user: @user, body: 'test') }
 
     let(:answer) { FactoryBot.create(:answer, body: 'test', question: question) }
 
@@ -76,6 +72,7 @@ RSpec.describe AnswersController, type: :controller do
     sign_in_user
 
     it 'destroys the requested answer' do
+      question = FactoryBot.create(:question, user: @user, body: 'test')
       answer = FactoryBot.create(:answer, question: question)
 
       expect do
