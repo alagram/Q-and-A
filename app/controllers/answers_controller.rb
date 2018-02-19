@@ -39,7 +39,8 @@ class AnswersController < ApplicationController
 
   def invoke_cables
     CableServices::NotifyJobsService.(
-      @question
+      question: @question,
+      current_user_id: current_user.id
     )
   end
 

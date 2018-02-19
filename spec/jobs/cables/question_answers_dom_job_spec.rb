@@ -25,11 +25,11 @@ RSpec.describe Cables::QuestionAnswersDomJob do
 
   it 'enqueues a default based job' do
     ActiveJob::Base.queue_adapter = :test
-    expect { Cables::QuestionAnswersDomJob.perform_later(@question) }.to have_enqueued_job.on_queue('default')
+    expect { Cables::QuestionAnswersDomJob.perform_later(@question, @user.id) }.to have_enqueued_job.on_queue('default')
   end
 
   it 'renders a partial' do
     expect(ApplicationController).to receive(:render)
-    Cables::QuestionAnswersDomJob.perform_now(@question)
+    Cables::QuestionAnswersDomJob.perform_now(@question, @user.id)
   end
 end
