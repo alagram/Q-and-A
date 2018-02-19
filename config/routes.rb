@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   resources :questions do
     collection do
       get :autocomplete
+      get :search
     end
 
     resources :answers
