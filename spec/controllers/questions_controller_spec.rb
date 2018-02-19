@@ -67,6 +67,7 @@ RSpec.describe QuestionsController, type: :controller do
     before do
       post :create, params: { question: FactoryBot.attributes_for(:question) }
     end
+
     context 'with unauthenticated user' do
       it 'redirects on unauthenticated user' do
         expect(response).to have_http_status(:redirect)
@@ -81,7 +82,7 @@ RSpec.describe QuestionsController, type: :controller do
       sign_in_user
 
       it 'redirects to root_path' do
-        post :create, params: { question: FactoryBot.attributes_for(:question) }
+        post :create, params: { question: valid_attribs }
         expect(response).to redirect_to root_path
       end
 
@@ -91,13 +92,18 @@ RSpec.describe QuestionsController, type: :controller do
         end.to change(Question, :count).by(1)
       end
 
-      it 'assigns question to current_user' do
+      it 'assigns question to as @question' do
         post :create, params: { question: valid_attribs }
         expect(assigns(:question)).to be_a(Question)
         expect(assigns(:question)).to be_persisted
       end
 
-      it 'render "new on failure' do
+      it 'assings question to current_user' do
+        post :create, params: { question: valid_attribs }
+        expect(Question.first.user).to eq @user
+      end
+
+      it 'render "new" on failure' do
         post :create, params: { question: FactoryBot.attributes_for(:question, body: nil) }
         expect(response).to render_template :new
       end
@@ -114,18 +120,21 @@ RSpec.describe QuestionsController, type: :controller do
         { body: 'Hell yeah!' }
       end
 
+      let(:subject) { put :update, params: { id: question.to_param, question: new_attribs } }
+
+      before do
+        subject
+      end
+
       it 'updates the requested question' do
-        put :update, params: { id: question.to_param, question: new_attribs }
         expect(question.reload.body).to eq 'Hell yeah!'
       end
 
       it "assings the requested question as @question" do
-        put :update, params: { id: question.to_param, question: new_attribs }
         expect(assigns(:question)).to eq question
       end
 
       it 'redirects to the question' do
-        put :update, params: { id: question.to_param, question: new_attribs }
         expect(response).to redirect_to question_path(question)
       end
     end
