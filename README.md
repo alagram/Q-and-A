@@ -26,6 +26,10 @@ ActionCable has been used to allow updates to answers to display automatically. 
 
 The way is works is that, given a question, if any other user should post an answer it will display automatically without the user having to refresh their page.
 
+We connect to a local instance of redis in development, so you'll have to install redis:
+
+* run `brew install redis` and follow the instructions on how to start redis.
+
 
 # Other features
 Questions and answers can be updated. Pagination has been added to the questions index page to help users with navigating questions easily should the number of questions increase.
@@ -38,6 +42,6 @@ How to get started:
 * run `rake db:create:all` and `rake db:migrate` to create databases and run migrations
 
 
-* run `PORT=300 foreman start -m web=1,worker=2 -f Procfile.dev`
+* run `PORT=3000 foreman start -m web=1,worker=2 -f Procfile.dev`
 
 * run `rspec` to run entire test suite.
