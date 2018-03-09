@@ -21,7 +21,7 @@ Then start elasticseach by running:
 `brew services start elasticsearch`
 
 
-# Action Cable
+# ActionCable
 ActionCable has been used to allow updates to answers to display automatically. It is done through ActiveJob with Sidekiq, and a service object. It is fully tested and I think it's a very interesting feature as it shows other ways of making good use of ActionCable that aren't a chat app.
 
 The way is works is that, given a question, if any other user should post an answer it will display automatically without the user having to refresh their page.
